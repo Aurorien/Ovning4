@@ -40,7 +40,7 @@ namespace SkalProj_Datastrukturer_Minne
                     + "\n1. Examine a List"
                     + "\n2. Examine a Queue"
                     + "\n3. Examine a Stack"
-                    //+ "\n4. CheckParenthesis"
+                    + "\n4. CheckParenthesis"
                     + "\n0. Exit the application");
                 char input = ' '; //Creates the character input to be used with the switch-case below.
                 try
@@ -63,9 +63,9 @@ namespace SkalProj_Datastrukturer_Minne
                     case '3':
                         ExamineStack();
                         break;
-                    //case '4':
-                    //    CheckParanthesis();
-                    //    break;
+                    case '4':
+                        CheckParanthesis();
+                        break;
                     /*
                      * Extend the menu to include the recursive 
                      * and iterative exercises.
@@ -424,6 +424,7 @@ namespace SkalProj_Datastrukturer_Minne
         //    the queue should get help first.
         //
         // 2. See code implementation above.
+                    }
 
         static void CheckParanthesis()
         {
@@ -433,8 +434,59 @@ namespace SkalProj_Datastrukturer_Minne
              * Example of incorrect: (()]), [), {[()}],  List<int> list = new List<int>() { 1, 2, 3, 4 );
              */
 
+            var stack = new Stack<char>();
+            var pairs = new Dictionary<char, char> { { ')', '(' }, { '}', '{' }, { ']', '[' } };
+            bool isValid = true;
+
+            Console.WriteLine("=========================================");
+            Console.WriteLine("CheckParanthesis");
+            Console.WriteLine("=========================================\n\n");
+            Console.WriteLine("Input a string and press enter to check if the parentheses in the string are well-formed");
+            Console.WriteLine("Exit to main menu by inputting q and pressing Enter.");
+
+            while (true)
+            {
+                Console.Write("Input here: ");
+                string input = Console.ReadLine() ?? string.Empty;
+
+                if (input.Trim() == "q")
+                    return;
+                else
+                    foreach (char c in input)
+                    {
+                        if (c == '(' || c == '{' || c == '[')
+                        {
+                            stack.Push(c);
+                        }
+                        else if (pairs.ContainsKey(c))
+                        {
+                            if (stack.Count == 0 || stack.Pop() != pairs[c])
+                            {
+                                isValid = false;
+                                break;
+                            }
         }
 
+                isValid = isValid && stack.Count == 0;
+
+                Console.WriteLine($"\nResult: " +
+                    $"{(isValid ? "Success" : "Fail")}. " +
+                    $"The string '{input}' has its parentheses " +
+                    $"{(isValid ? "well-formed." : "is not well-formed, make sure to edit it!")}\n");
+            }
+        }
+
+        // Task 4
+        //
+        // 1. The method CheckParanthesis will check the string character by character. When there is an opening bracket it
+        // will register it in a data structure. When a closing bracket appears, it check with the last entry in the registry
+        // to see if that is an equivalent match. If they match well, it passes on to check characters in the same way through
+        // the string. If the brackets does not match, it does not pass and break the check. Then tells the user that the
+        // string is not well-formed. If it reaches through the string with all brackets matching well and no leftovers, then
+        // it tells the user that the string is well-formed. Because I need to check with the last entry in the registred
+        // brackets, Stack is the most convenient datastructure to use with its First-In-Last-Out (FILO) principle.
+        //
+        // 2. See code implementation above.
     }
 }
 
