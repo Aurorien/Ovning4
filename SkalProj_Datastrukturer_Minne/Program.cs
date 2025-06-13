@@ -36,7 +36,7 @@ namespace SkalProj_Datastrukturer_Minne
                 Console.Clear();
                 Console.ForegroundColor = ConsoleColor.DarkGreen;
 
-                Console.WriteLine("Please navigate through the menu by inputting the number \n(1, 2, 3 ,4, 0) of your choice"
+                Console.WriteLine("Please navigate through the menu by inputting the number \n(1, 2, 3 ,4, 0) of your choice\n"
                     + "\n1. Examine a List"
                     + "\n2. Examine a Queue"
                     + "\n3. Examine a Stack"
@@ -45,6 +45,7 @@ namespace SkalProj_Datastrukturer_Minne
                 char input = ' '; //Creates the character input to be used with the switch-case below.
                 try
                 {
+                    Console.Write("\nInput here: ");
                     input = Console.ReadLine()![0]; //Tries to set input to the first char in an input line
                 }
                 catch (IndexOutOfRangeException) //If the input line is empty, we ask the users for some input.
@@ -97,7 +98,6 @@ namespace SkalProj_Datastrukturer_Minne
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.Cyan;
             List<string> theList = new List<string>();
-            bool isEditList = true;
 
             Console.WriteLine("=========================================");
             Console.WriteLine("Examine a List");
@@ -106,7 +106,7 @@ namespace SkalProj_Datastrukturer_Minne
                 "Prefix the value you want to add to the list with +, or prefix with - to remove it. " +
                  "Start your input with q if you want to quit to main menu.\n");
 
-            while (isEditList)
+            while (true)
             {
                 Console.Write("Input here: ");
 
@@ -117,8 +117,7 @@ namespace SkalProj_Datastrukturer_Minne
                 switch (nav)
                 {
                     case 'q':
-                        isEditList = false;
-                        break;
+                        return;
                     case '+':
                         theList.Add(value);
                         Console.WriteLine($"\nList count: {theList.Count()}");
@@ -183,7 +182,6 @@ namespace SkalProj_Datastrukturer_Minne
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.Green;
             Queue<string> theQueue = new Queue<string>();
-            bool isEditQueue = true;
 
             Console.WriteLine("=========================================");
             Console.WriteLine("Examine a Queue");
@@ -194,7 +192,7 @@ namespace SkalProj_Datastrukturer_Minne
                  "Exit to main menu by inputting q.");
 
 
-            while (isEditQueue)
+            while (true)
             {
                 Console.Write("Input here: ");
 
@@ -205,8 +203,7 @@ namespace SkalProj_Datastrukturer_Minne
                 switch (nav)
                 {
                     case 'q':
-                        isEditQueue = false;
-                        break;
+                        return;
                     case '+':
                         theQueue.Enqueue(value);
                         Console.WriteLine($"\nQueue count: {theQueue.Count()}");
@@ -292,7 +289,7 @@ namespace SkalProj_Datastrukturer_Minne
         //         "Exit to main menu by inputting q.");
 
 
-        //    while (isEditStack)
+        //    while (true)
         //    {
         //        Console.Write("Input here: ");
 
@@ -303,8 +300,7 @@ namespace SkalProj_Datastrukturer_Minne
         //        switch (nav)
         //        {
         //            case 'q':
-        //                isEditStack = false;
-        //                break;
+        //                return;
         //            case '+':
         //                theStack.Push(value);
         //                Console.WriteLine($"\nQueue count: {theStack.Count()}");
@@ -326,7 +322,6 @@ namespace SkalProj_Datastrukturer_Minne
         {
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.Red;
-            bool isEditStack = true;
 
             Console.WriteLine("=========================================");
             Console.WriteLine("Examine a Stack");
@@ -336,7 +331,7 @@ namespace SkalProj_Datastrukturer_Minne
                  "Exit to main menu by inputting q and pressing Enter.");
 
 
-            while (isEditStack)
+            while (true)
             {
                 Console.Write("\nInput here: ");
                 string input = Console.ReadLine() ?? string.Empty;
@@ -346,8 +341,7 @@ namespace SkalProj_Datastrukturer_Minne
                 switch (nav)
                 {
                     case 'q':
-                        isEditStack = false;
-                        break;
+                        return;
                     case 'r':
                         Console.WriteLine($"\nReversed text:\n{ReverseText(value)}\n");
                         break;
@@ -424,7 +418,6 @@ namespace SkalProj_Datastrukturer_Minne
         //    the queue should get help first.
         //
         // 2. See code implementation above.
-                    }
 
         static void CheckParanthesis()
         {
@@ -465,7 +458,8 @@ namespace SkalProj_Datastrukturer_Minne
                                 isValid = false;
                                 break;
                             }
-        }
+                        }
+                    }
 
                 isValid = isValid && stack.Count == 0;
 
